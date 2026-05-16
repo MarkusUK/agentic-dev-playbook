@@ -1,170 +1,194 @@
 # Example AGENTS.md and CLAUDE.md
 
 The starter ships generic scaffolds. This page shows what a **filled-in**
-`AGENTS.md` and `CLAUDE.md` look like for a real project, so you can see what
-"good" looks like before adapting one for your own repo.
+`AGENTS.md` and `CLAUDE.md` look like for a real project, so you can see
+what "good" looks like before adapting one for your own repo.
 
-The example uses a fictional project called **Hanami** — an Android habit
-tracker built with Jetpack Compose, Hilt, Room, and Coroutines. Adapt the
-shape, not the words: a Next.js app or a Python service would have very
-different commands and protected files but the same structure.
+The example uses a fictional polyglot project called **Tide**:
+
+- **Mobile** — Flutter / Dart, Riverpod for state, Dio for HTTP.
+- **Backend** — Python 3.12, FastAPI, SQLAlchemy 2.x (async), Alembic.
+- **Database** — PostgreSQL 16, run locally via Docker Compose.
+
+Polyglot is the interesting case because the `AGENTS.md` has to make
+clear which commands belong to which side of the project. Adapt the
+shape, not the words — the discipline transfers to any stack.
 
 ## What makes these files effective
 
 Before the example, the five habits that matter most:
 
-1. **Front-load constraints.** The first thing the agent reads should be what
-   it must not do, not background information.
-2. **Name protected files explicitly** by path or glob. "Don't touch secrets"
-   is too vague; `secrets.properties`, `*.keystore`, `app/google-services.json`
-   is enforceable.
-3. **List real commands**, not placeholders. `./gradlew :app:test --tests "*HabitDaoTest"`
-   beats "run the tests".
-4. **Keep them short enough that the agent will actually re-read them.** Under
-   ~200 lines is the sweet spot. Push detail into `docs/` and link from here.
-5. **Do not duplicate the README.** The README is for humans browsing GitHub.
-   `AGENTS.md` is operational instructions for an agent.
+1. **Front-load constraints.** The first thing the agent reads should
+   be what it must not do, not background information.
+2. **Name protected files explicitly** by path or glob. "Don't touch
+   secrets" is too vague; `.env`, `backend/secrets/**`,
+   `mobile/android/key.properties` is enforceable.
+3. **List real commands** with the working directory. In a polyglot
+   repo, `poetry run pytest` is useless without knowing it runs from
+   `backend/`.
+4. **Keep them short enough that the agent will re-read them.** Under
+   ~200 lines is the sweet spot. Push detail into `docs/` and link.
+5. **Do not duplicate the README.** The README is for humans browsing
+   GitHub. `AGENTS.md` is operational instructions for an agent.
 
 ## Anti-patterns to avoid
 
-- Inlining a 1000-line architecture description. Link to `docs/architecture.md` instead.
+- Inlining a 1000-line architecture description. Link to
+  `docs/architecture.md` instead.
 - Listing every file in the repo. The agent can grep.
 - Vague rules like "write good code" or "be careful". Unenforceable.
-- Stale commands. If you renamed a Gradle module six months ago, fix
+- Stale commands. If you renamed a directory six months ago, fix
   `AGENTS.md` the same day.
 - Secrets in either file. Use environment variable names, never values.
-- A wall of "always" and "never" with no priority order. Group must-not, must,
-  should, optional.
+- A wall of "always" and "never" with no priority order. Group
+  must-not, must, should, optional.
 
 ## Example AGENTS.md
 
 ````markdown
-# Hanami — Agent Instructions
+# Tide — Agent Instructions
 
-Hanami is an Android habit tracker built with Jetpack Compose. These
-instructions apply to Codex and any other coding agent working in this repo.
+Tide is a small mobile + API project. Mobile is Flutter, backend is
+FastAPI, data lives in PostgreSQL. These instructions apply to Codex
+and any other coding agent working in this repo.
 
 ## Must not do
 
-- Commit, push, merge, deploy, or publish unless I explicitly say so.
+- Commit, push, merge, or deploy unless I explicitly say so.
 - Edit any of these without an explicit task:
-  - `secrets.properties`
-  - `*.keystore`, `*.jks`
-  - `app/google-services.json`, `app/GoogleService-Info.plist`
-  - `app/proguard-rules.pro`
-  - `gradle/libs.versions.toml` (coordinate dependency bumps with me first)
-  - `app/src/main/java/dev/markus/hanami/data/db/migrations/*` (released
-    Room migrations are immutable — add a new one instead)
-- Add a new third-party dependency without explaining why in the diff message.
-- Use `GlobalScope` or `runBlocking` in production code.
-- Mock the Room DAO in tests — use an in-memory Room database.
-- Remove or weaken a failing test to make the build pass.
+  - `.env`, `.env.*`, `backend/secrets/**`
+  - `mobile/android/key.properties`, `mobile/android/*.jks`
+  - `backend/alembic/versions/*.py` for migrations already on `main`
+    (released migrations are immutable — add a new revision instead)
+  - `pubspec.lock`, `backend/poetry.lock` (do not regenerate casually)
+- Run database commands against anything other than the local Docker
+  Postgres. Never connect to staging or production without my approval.
+- Add a new Python or Dart dependency without explaining why in the
+  diff.
 
 ## Must do before editing
 
-1. Read `docs/architecture.md` and the relevant feature module's `README.md`.
-2. Work on a feature branch (`feature/<short-name>`).
-3. Inspect nearby code and tests before writing new code; match the
-   existing patterns rather than introducing new ones.
-4. Keep diffs small enough that I can review them in one sitting.
+1. Work on a feature branch (`feature/<short-name>`).
+2. Read `docs/architecture.md` for the relevant side (mobile or backend).
+3. Bring the local stack up:
 
-## Tech stack
+   ```bash
+   docker compose -f infra/docker-compose.yml up -d postgres
+   ```
 
-```text
-Language:        Kotlin 2.x
-UI:              Jetpack Compose, Material 3
-DI:              Hilt
-Persistence:     Room (SQLite)
-Concurrency:     Kotlin Coroutines + Flow
-Navigation:      Jetpack Navigation Compose
-Build:           Gradle (Kotlin DSL), version catalog
-Min SDK:         26   Target SDK: 35
-Unit tests:      JUnit 5, Turbine, MockK (for non-Room collaborators only)
-UI tests:        Compose UI test + Espresso
-```
+4. Inspect nearby code and tests; match existing patterns rather than
+   introducing new ones.
 
-## Where things live
+## Repo layout
 
 ```text
-app/src/main/java/dev/markus/hanami/
-  data/                  # Room entities, DAOs, repositories, migrations
-  domain/                # Use cases, pure Kotlin, no Android imports
-  ui/
-    theme/               # Material 3 tokens — do not scatter colors elsewhere
-    feature/
-      habits/            # Habit list, detail, create/edit
-      reflection/        # Daily reflection flow
-      onboarding/
-      settings/
-  di/                    # Hilt modules
-  HanamiApp.kt           # Application class
+tide/
+  mobile/                  # Flutter app
+    lib/
+      features/<feature>/  # screens, widgets, state per feature
+      data/                # API clients, DTOs
+      core/                # theme, routing, shared widgets
+    test/
+    pubspec.yaml
+  backend/                 # FastAPI service
+    app/
+      api/                 # route handlers
+      services/            # business logic
+      models/              # SQLAlchemy ORM models
+      schemas/             # Pydantic request/response models
+      db/                  # session, engine, base
+    tests/                 # pytest
+    alembic/
+      versions/            # migration scripts (immutable once merged)
+    pyproject.toml
+  infra/
+    docker-compose.yml     # local Postgres
+  docs/
 ```
 
-Feature modules follow MVI-lite: `<Feature>ViewModel` exposes a `StateFlow<UiState>`
-and a single `onEvent(Event)` function. Look at `HabitListViewModel` as the
-reference implementation.
+## Stack
+
+```text
+Mobile:    Flutter 3.x, Dart 3.x, Riverpod (state), Dio (HTTP)
+Backend:   Python 3.12, FastAPI, SQLAlchemy 2.x async, Alembic
+Database:  PostgreSQL 16 (Docker for local, managed for prod)
+Tests:     pytest + pytest-asyncio (backend), flutter_test (mobile)
+Tooling:   ruff + mypy (backend), dart analyze (mobile)
+Packaging: Poetry (backend), pub (mobile)
+```
 
 ## Commands
 
+Backend (run from `backend/`):
+
 ```bash
-# Unit tests (fast)
-./gradlew :app:testDebugUnitTest
-
-# Single test class
-./gradlew :app:testDebugUnitTest --tests "*HabitDaoTest"
-
-# Lint + Detekt
-./gradlew :app:lintDebug detekt
-
-# Debug build
-./gradlew :app:assembleDebug
-
-# Instrumented tests (need a running emulator or device)
-./gradlew :app:connectedDebugAndroidTest
+poetry install
+poetry run pytest                              # unit + integration
+poetry run pytest tests/api -k auth            # focused subset
+poetry run ruff check .
+poetry run mypy app
+poetry run alembic upgrade head                # apply migrations locally
+poetry run alembic revision --autogenerate -m "describe change"
+poetry run uvicorn app.main:app --reload       # dev server on :8000
 ```
 
-The full Android emulator workflow lives in `docs/testing.md`.
+Mobile (run from `mobile/`):
+
+```bash
+flutter pub get
+flutter test
+flutter analyze
+flutter run                                    # needs emulator or device
+flutter build apk --debug
+```
+
+Database (run from repo root):
+
+```bash
+docker compose -f infra/docker-compose.yml up -d postgres
+docker compose -f infra/docker-compose.yml exec postgres psql -U tide tide
+```
 
 ## MCPs and skills
 
-Project MCPs are in `.codex/config.toml`:
+Project MCPs (`.codex/config.toml`):
 
-- `figma` — read design context for screens we are building.
-- `context7` — current docs for Compose, Hilt, Room.
+- `context7` — current FastAPI, SQLAlchemy, Flutter, Riverpod docs.
+- `figma` — design context for mobile screens.
 
 Skills (`.agents/skills/`):
 
 - `review-pr` — diff review checklist.
-- `write-tests` — add or improve tests matching repo style.
+- `write-tests` — `pytest` or `flutter_test` depending on which side changed.
 - `debug-issue` — diagnose before fixing.
-- `android-testing` — emulator/AVD workflow.
-- `design-to-code` — turn Figma context into Compose UI.
+- `design-to-code` — turn Figma frames into Flutter widgets.
 
 Prompt explicitly when you want a tool used; do not assume.
 
 ## Common pitfalls in this codebase
 
-- **Recomposition cost.** Hoist individual fields, do not pass whole
-  `UiState` objects into leaf composables. Run the Compose compiler
-  metrics report if a list scrolls badly.
-- **Room migrations.** Released schemas are immutable. Add a new
-  migration in `data/db/migrations/` and update `Hanami_Database.kt`.
-- **CoroutineScope.** Use `viewModelScope` inside ViewModels and
-  injected `@ApplicationScope CoroutineScope` for app-wide work. Never
-  `GlobalScope`.
-- **Theme tokens.** All colors, spacings, shapes, and typography live in
-  `ui/theme/`. Do not inline hex values in feature code.
-- **Hilt and previews.** `@HiltViewModel` does not work in `@Preview`.
-  Use the `Preview*` ViewModel factories in `ui/preview/`.
+- **SQLAlchemy async sessions.** Always go through the dependency in
+  `app/db/session.py`. Do not create raw sessions inside route handlers.
+- **Alembic autogenerate.** It misses constraint, enum, and index
+  changes. Always review the generated script before committing.
+- **Pydantic v2 vs v1.** This project is v2. Use `model_dump()` not
+  `dict()`, `model_validate()` not `parse_obj()`.
+- **Flutter rebuilds.** Use Riverpod's `select` to avoid rebuilding the
+  whole screen on small state changes.
+- **CORS and emulator host.** An Android emulator reaches the backend
+  on `http://10.0.2.2:8000`, not `localhost`. iOS simulator uses
+  `localhost`. Backend CORS allows both during development.
+- **Database resets.** `docker compose down -v` deletes the volume.
+  Use it intentionally, not as a debugging reflex.
 
 ## Done means
 
-- Code compiles: `./gradlew :app:assembleDebug` passes.
-- Unit tests pass: `./gradlew :app:testDebugUnitTest`.
-- Lint + Detekt pass.
-- New behaviour has a test.
+- Backend: `pytest`, `ruff`, and `mypy` all pass.
+- Mobile: `flutter test` and `flutter analyze` pass.
+- New behaviour has a test on whichever side it lives.
+- If the change crosses both sides, an integration test covers the
+  contract.
 - Diff is small enough for one-sitting review.
-- I have approved any new dependency.
 
 ## Final response format
 
@@ -184,56 +208,58 @@ Risks / follow-ups:
 ````markdown
 @AGENTS.md
 
-# Hanami — Claude Code Instructions
+# Tide — Claude Code Instructions
 
-Read `AGENTS.md` first (imported above). This file adds Claude-specific
-behaviour on top of the shared project rules.
+Shared rules are in `AGENTS.md` (imported above). This file adds
+Claude-specific behaviour on top.
 
 ## Default stance
 
-- **Review-first.** Before editing, run `git status` and `git diff` and
-  describe what you see.
+- **Review-first.** Run `git status` and `git diff` before editing
+  anything.
 - **Do not edit during review** unless I explicitly ask.
-- **Categorise review findings** as `Must fix`, `Should fix`, `Optional`.
-- For large tasks, propose a split into smaller PRs rather than one big diff.
+- **Categorise findings** as `Must fix`, `Should fix`, `Optional`.
+- For changes that touch both `mobile/` and `backend/`, propose
+  splitting into two PRs unless they are genuinely coupled (e.g. a
+  new API endpoint and its client).
 
-## Use subagents for focused roles
+## Subagents
 
-Project subagents are in `.claude/agents/`:
+Project subagents (`.claude/agents/`):
 
-- `reviewer` — independent diff review pass. Use before I commit.
-- `compose-perf-checker` — run after touching list/grid screens.
+- `reviewer` — independent diff review pass.
+- `sql-reviewer` — extra pass for anything touching
+  `backend/alembic/versions/` or raw SQL.
 
-Subagents are isolated and have their own tool limits. Prefer them over
-inline prompts when the role is well-defined.
+Subagents have isolated context and their own tool limits. Prefer
+them over inline prompts when the role is well-defined.
 
 ## Hooks
 
-Project hooks live in `.claude/settings.json` and `.claude/hooks/`. They
-block destructive commands (`rm -rf`, `git push origin main`, etc.)
-before the Bash tool runs. If a hook blocks you, do not retry the
-command — tell me what you were trying to do.
+`.claude/settings.json` and `.claude/hooks/` block destructive shell
+commands (`rm -rf`, `git push origin main`, force pushes, deployment
+commands) before the Bash tool runs. If a hook blocks you, do not
+retry — tell me what you were trying to do and why.
 
 ## Skills
 
-Use these skills where the prompt matches:
+Use these when the prompt matches:
 
 - `review-pr` — for diff and PR review.
-- `write-tests` — for adding tests.
+- `write-tests` — for adding tests on either side.
 - `debug-issue` — for diagnosing a bug before proposing a fix.
-- `design-to-code` — for turning Figma frames into Compose.
-- `ui-assets` — when sourcing components from 21st.dev or similar.
+- `design-to-code` — for turning Figma frames into Flutter widgets.
 
-Do not invoke MCP tools (Figma, Stitch, etc.) unless I name them in
-the prompt.
+Do not invoke MCP tools (Figma, Context7, etc.) unless I name them
+in the prompt.
 
 ## Model preference
 
 Use Sonnet by default. Switch to Opus for:
 
-- Room migration design
-- Architecture changes that touch more than one feature module
-- Security or auth review
+- Alembic migration design.
+- Auth or session changes on either side.
+- Anything that touches both `mobile/` and `backend/` at once.
 
 See `docs/model-selection.md` for the broader rule.
 ````
@@ -242,17 +268,22 @@ See `docs/model-selection.md` for the broader rule.
 
 Reuse this **structure** verbatim:
 
-- "Must not do" first, then "Must do before editing", then stack, then commands.
+- "Must not do" first, then "Must do before editing", then layout,
+  stack, commands.
 - Real paths and globs in protected-files lists.
-- A short "Common pitfalls" section based on bugs you have already hit.
+- Working directory shown alongside each command in a polyglot repo.
+- "Common pitfalls" drawn from real incidents, not theoretical risks.
 - `Done means` checklist and final response format.
 
 Replace this **content** entirely for your project:
 
 - Stack, paths, commands, dependencies.
 - MCP and skill list — only include the ones you actually have configured.
-- Common pitfalls — these should come from your real incident history.
-- Subagent names — only list ones you have created.
+- Common pitfalls — yours will be specific to your stack and history.
+- Subagent names — only list ones you have actually created.
 
-If your project is not Android, the most useful diff is in the commands and
-protected files. The discipline is the same.
+The Tide example happens to be Flutter + FastAPI + Postgres. A
+Next.js + tRPC + Prisma project, or a Rust service with a React admin
+panel, would look very different at the file level but the discipline
+is the same: front-load constraints, name protected files, list real
+commands, keep it short.
