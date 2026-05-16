@@ -224,9 +224,9 @@ creating PR descriptions
 reviewing diffs
 ```
 
-## Android AVD testing from terminal
+## Android AVD testing from a terminal
 
-You do not need VS Code to run Android emulators or Android tests.
+Android AVDs and Android tests can run from any terminal as long as the Android SDK CLI tools are installed and on your `PATH`. Agents drive these the same way you would.
 
 List AVDs:
 

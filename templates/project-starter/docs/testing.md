@@ -32,9 +32,11 @@ For Android/Gradle:
 ./gradlew connectedAndroidTest
 ```
 
-## Android AVD and emulator from terminal
+## Running an Android emulator from a terminal
 
-You do **not** need VS Code to run Android emulators. You can run Android AVDs from a normal terminal, assuming Android SDK tools are installed and available.
+Android AVDs can be started and controlled from any terminal as long as the Android SDK command-line tools (`emulator`, `adb`, `sdkmanager`) are installed and on your `PATH`. This is the recommended setup for agent workflows because the agent can drive the emulator with the same commands you would.
+
+If `emulator` or `adb` is not found, check that `ANDROID_HOME` (or `ANDROID_SDK_ROOT`) is set and that `$ANDROID_HOME/emulator` and `$ANDROID_HOME/platform-tools` are on your `PATH`.
 
 Common commands:
 
