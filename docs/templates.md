@@ -22,6 +22,7 @@ docs/release.md                   # Release and PR safety guidance
 docs/agent-workflow-reference.md  # Full agent workflow reference
 docs/codex-setup.md               # Codex config, AGENTS.md, skills, sandboxing
 docs/claude-code-setup.md         # Claude settings, CLAUDE.md, hooks, subagents
+docs/example-agents-and-claude.md # Worked AGENTS.md and CLAUDE.md example
 docs/model-selection.md           # Model and effort selection notes
 docs/hooks.md                     # Hook and guardrail examples
 docs/mcp-primer.md                # Plain-English MCP, skills, hooks primer

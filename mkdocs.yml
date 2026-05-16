@@ -15,18 +15,18 @@ theme:
     - content.code.copy
     - content.code.select
   palette:
-    - scheme: default
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/weather-sunny
-        name: Switch to dark mode
     - scheme: slate
       primary: indigo
       accent: indigo
       toggle:
         icon: material/weather-night
         name: Switch to light mode
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
 plugins:
   - search
 
@@ -37,6 +37,7 @@ nav:
       - Agent Workflow Reference: core/agent-workflow-reference.md
       - Codex Setup: core/codex-setup.md
       - Claude Code Setup: core/claude-code-setup.md
+      - Example AGENTS.md + CLAUDE.md: core/example-agents-and-claude.md
       - Model Selection: core/model-selection.md
       - Hooks and Guardrails: core/hooks.md
       - Agent Rules: core/agent-rules.md

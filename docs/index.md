@@ -12,7 +12,20 @@ CI = enforce
 GitHub PR = final audit trail
 ```
 
-## Start here
+## Reading order for first-time visitors
+
+If you have never used this playbook before, read in this order:
+
+1. [Start Here in 10 Minutes](quickstart.md) — shortest setup path.
+2. [MCP and Skills Primer](mcp/mcp-primer.md) — plain-English mental model.
+3. [Codex Setup](core/codex-setup.md) **or** [Claude Code Setup](core/claude-code-setup.md) — pick the tool you use first.
+4. [Hooks and Guardrails](core/hooks.md) — automatic safety.
+5. [Example AGENTS.md and CLAUDE.md](core/example-agents-and-claude.md) — what a good filled-in version looks like.
+6. [Starter Template](templates.md) — copy into a new project.
+
+Everything else (skill anatomy, MCP scopes, design-start, troubleshooting) is reference. Look it up when you need it.
+
+## Setup steps
 
 1. Read [Start Here in 10 Minutes](quickstart.md).
 2. Copy `templates/project-starter/` into a new project.
