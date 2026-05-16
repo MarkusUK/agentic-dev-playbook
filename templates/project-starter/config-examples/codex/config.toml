@@ -1,0 +1,36 @@
+# Project-level MCP note: copy only relevant MCPs into your repo's .codex/config.toml. Keep global config minimal.
+
+# Example Codex MCP configuration
+# Copy relevant parts into:
+#   ~/.codex/config.toml
+# or project-scoped:
+#   your-repo/.codex/config.toml
+
+# Figma remote MCP
+[mcp_servers.figma]
+url = "https://mcp.figma.com/mcp"
+enabled = true
+required = false
+tool_timeout_sec = 60
+
+# Google Stitch MCP
+# Replace with the current official Stitch MCP endpoint from Google's docs.
+# [mcp_servers.stitch]
+# url = "<STITCH_MCP_URL>"
+# enabled = true
+# required = false
+
+# 21st.dev / Magic MCP
+# Replace package name with the current package from 21st.dev docs.
+# [mcp_servers.magic]
+# command = "npx"
+# args = ["-y", "<PACKAGE_NAME_FROM_21ST_DOCS>"]
+# enabled = true
+# required = false
+
+# Context7 docs MCP example
+# [mcp_servers.context7]
+# command = "npx"
+# args = ["-y", "@upstash/context7-mcp"]
+# enabled = true
+# required = false

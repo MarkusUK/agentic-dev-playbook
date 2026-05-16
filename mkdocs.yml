@@ -1,0 +1,70 @@
+site_name: Agentic Dev Playbook
+site_description: Safe and practical Codex + Claude Code workflows for agentic development
+site_url: https://markusuk.github.io/agentic-dev-playbook/
+repo_url: https://github.com/MarkusUK/agentic-dev-playbook
+repo_name: MarkusUK/agentic-dev-playbook
+edit_uri: edit/main/docs/
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - content.code.copy
+    - content.code.select
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Start Here: quickstart.md
+  - Core Workflow:
+      - Agent Workflow Reference: core/agent-workflow-reference.md
+      - Codex Setup: core/codex-setup.md
+      - Claude Code Setup: core/claude-code-setup.md
+      - Model Selection: core/model-selection.md
+      - Hooks and Guardrails: core/hooks.md
+      - Agent Rules: core/agent-rules.md
+      - Testing: core/testing.md
+      - Architecture Template: core/architecture.md
+      - Release Guide: core/release.md
+  - MCP and Skills:
+      - MCP and Skills Primer: mcp/mcp-primer.md
+      - MCP and Skills: mcp/mcp-and-skills.md
+      - Project-Level MCPs and Skills: mcp/project-level-mcps-and-skills.md
+      - Claude MCP Scopes: mcp/claude-mcp-scopes.md
+      - Skills Locations: mcp/skills-locations.md
+      - Skill Anatomy: mcp/skills-anatomy.md
+      - Security: mcp/security.md
+      - Verification Status: mcp/verification-status.md
+  - Design Start:
+      - Overview: design-start/README.md
+      - Workflow: design-start/00-overview-workflow.md
+      - Brand Discovery: design-start/01-brand-discovery.md
+      - Three Design Directions: design-start/02-three-design-directions.md
+      - Select and Refine: design-start/03-select-and-refine-direction.md
+      - Use Design MCPs: design-start/04-use-design-mcps.md
+      - Screen Specs: design-start/05-screen-specs.md
+      - Interactive Mockups: design-start/06-interactive-mockups.md
+      - Brand Kit Template: design-start/07-brand-kit-template.md
+      - Implementation Handoff: design-start/08-implementation-handoff.md
+      - Japanese Sakura Example: design-start/09-japanese-sakura-example.md
+  - Starter Template: templates.md
+  - Copy/Paste Prompts:
+      - All-in-One Design Start: copy-paste-prompts/all-in-one-design-start-prompt.md
+      - MCP Design Exploration: copy-paste-prompts/mcp-design-exploration-prompt.md
+      - Interactive Mockup: copy-paste-prompts/interactive-mockup-prompt.md
+      - Implementation Handoff: copy-paste-prompts/implementation-handoff-prompt.md
+  - Wiki Map: wiki-map.md
+  - Troubleshooting: troubleshooting.md

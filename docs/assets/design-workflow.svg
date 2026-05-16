@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="300" viewBox="0 0 960 300" role="img" aria-labelledby="title desc">
+  <title id="title">Agentic design workflow</title>
+  <desc id="desc">Flow from idea to brand directions, design MCPs, mockups, implementation, review, and release.</desc>
+  <rect width="960" height="300" fill="#f8fafc"/>
+  <g font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" fill="#111827">
+    <text x="48" y="52" font-size="28" font-weight="700">Design-to-Code Workflow</text>
+    <text x="48" y="82" font-size="15" fill="#4b5563">Use design context deliberately, then hand off to small, reviewable implementation.</text>
+  </g>
+  <g transform="translate(48 122)" font-family="Inter, Segoe UI, Arial, sans-serif">
+    <g>
+      <rect width="120" height="96" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="60" y="39" text-anchor="middle" font-size="16" font-weight="700" fill="#111827">Idea</text>
+      <text x="60" y="64" text-anchor="middle" font-size="13" fill="#64748b">problem</text>
+      <text x="60" y="82" text-anchor="middle" font-size="13" fill="#64748b">audience</text>
+    </g>
+    <path d="M132 48 H172" stroke="#94a3b8" stroke-width="2"/>
+    <path d="M166 42 L174 48 L166 54" fill="none" stroke="#94a3b8" stroke-width="2"/>
+    <g transform="translate(186 0)">
+      <rect width="120" height="96" rx="8" fill="#eef2ff" stroke="#818cf8"/>
+      <text x="60" y="33" text-anchor="middle" font-size="16" font-weight="700" fill="#312e81">Brand</text>
+      <text x="60" y="58" text-anchor="middle" font-size="13" fill="#4f46e5">directions</text>
+      <text x="60" y="76" text-anchor="middle" font-size="13" fill="#4f46e5">tokens</text>
+    </g>
+    <path d="M318 48 H358" stroke="#94a3b8" stroke-width="2"/>
+    <path d="M352 42 L360 48 L352 54" fill="none" stroke="#94a3b8" stroke-width="2"/>
+    <g transform="translate(372 0)">
+      <rect width="120" height="96" rx="8" fill="#ecfeff" stroke="#22d3ee"/>
+      <text x="60" y="33" text-anchor="middle" font-size="16" font-weight="700" fill="#164e63">MCPs</text>
+      <text x="60" y="58" text-anchor="middle" font-size="13" fill="#0e7490">Figma</text>
+      <text x="60" y="76" text-anchor="middle" font-size="13" fill="#0e7490">Stitch</text>
+    </g>
+    <path d="M504 48 H544" stroke="#94a3b8" stroke-width="2"/>
+    <path d="M538 42 L546 48 L538 54" fill="none" stroke="#94a3b8" stroke-width="2"/>
+    <g transform="translate(558 0)">
+      <rect width="120" height="96" rx="8" fill="#f0fdf4" stroke="#4ade80"/>
+      <text x="60" y="33" text-anchor="middle" font-size="16" font-weight="700" fill="#14532d">Mockup</text>
+      <text x="60" y="58" text-anchor="middle" font-size="13" fill="#15803d">flows</text>
+      <text x="60" y="76" text-anchor="middle" font-size="13" fill="#15803d">screens</text>
+    </g>
+    <path d="M690 48 H730" stroke="#94a3b8" stroke-width="2"/>
+    <path d="M724 42 L732 48 L724 54" fill="none" stroke="#94a3b8" stroke-width="2"/>
+    <g transform="translate(744 0)">
+      <rect width="120" height="96" rx="8" fill="#fff7ed" stroke="#fb923c"/>
+      <text x="60" y="33" text-anchor="middle" font-size="16" font-weight="700" fill="#7c2d12">Code</text>
+      <text x="60" y="58" text-anchor="middle" font-size="13" fill="#c2410c">small slice</text>
+      <text x="60" y="76" text-anchor="middle" font-size="13" fill="#c2410c">tests</text>
+    </g>
+  </g>
+  <g font-family="Inter, Segoe UI, Arial, sans-serif" fill="#334155" font-size="14">
+    <text x="48" y="260">Codex implements. Claude Code reviews. You approve. CI enforces.</text>
+  </g>
+</svg>
