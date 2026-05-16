@@ -10,6 +10,7 @@ theme:
     - navigation.sections
     - navigation.expand
     - navigation.top
+    - navigation.footer
     - search.highlight
     - content.code.copy
     - content.code.select
@@ -17,12 +18,15 @@ theme:
     - scheme: default
       primary: indigo
       accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
     - scheme: slate
       primary: indigo
       accent: indigo
       toggle:
         icon: material/weather-night
-        name: Switch to dark mode
+        name: Switch to light mode
 plugins:
   - search
 
