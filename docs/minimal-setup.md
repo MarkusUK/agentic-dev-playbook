@@ -4,14 +4,67 @@ The shortest path from "no setup" to a safe first agent session in an
 existing repo. No starter template, no skills, no MCPs, no hooks. Add
 those later when you actually need them.
 
+This minimal setup assumes:
+
+```text
+Codex = main coding agent that implements changes
+Claude Code = review agent that checks the diff before you commit
+You = final approver who commits and pushes
+```
+
+You can use only Codex if you want the smallest possible setup. Add
+Claude Code when you want a second, independent review pass.
+
 If you are starting a brand-new project, use the fuller
 [Start Here in 10 Minutes](quickstart.md) instead — it bundles the
 starter template.
 
 ## 1. Drop one file in your repo root
 
-Pick the one matching your tool. Both are short. Adjust the commands
-under **Commands** to match your project.
+Pick the one matching your tool. Both are short.
+
+The **Commands** section is where you tell the agent the exact terminal
+commands that prove the project still works. These are not special Codex
+or Claude commands. They are the same commands you would run yourself.
+
+If you do not know them yet, leave the line as `Unknown - ask me first`
+instead of guessing. Your first agent task can be to inspect the repo and
+suggest the right commands.
+
+Common examples:
+
+```text
+Node / React / Next.js:
+- Tests: npm test
+- Lint:  npm run lint
+- Build: npm run build
+
+Python:
+- Tests: pytest
+- Lint:  ruff check .
+- Build: Unknown - ask me first
+
+Flutter:
+- Tests: flutter test
+- Lint:  flutter analyze
+- Build: flutter build apk --debug
+
+Rust:
+- Tests: cargo test
+- Lint:  cargo clippy
+- Build: cargo build
+```
+
+Where to look:
+
+```text
+package.json          # npm scripts
+pyproject.toml        # Python tooling
+Makefile              # make commands
+pubspec.yaml          # Flutter/Dart
+Cargo.toml            # Rust
+README.md             # project-specific setup notes
+```
 
 ### AGENTS.md (Codex)
 
@@ -34,9 +87,9 @@ under **Commands** to match your project.
 
 ## Commands
 
-- Tests: `<your test command>`
-- Lint:  `<your lint command>`
-- Build: `<your build command>`
+- Tests: `Unknown - ask me first`
+- Lint:  `Unknown - ask me first`
+- Build: `Unknown - ask me first`
 
 ## End every task with
 
