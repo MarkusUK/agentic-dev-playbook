@@ -1,16 +1,65 @@
 # Starter Template Guide
 
-The starter template is the reusable payload for new projects.
+There are two starter templates.
+
+```text
+templates/project-starter-lean/    # recommended for most new apps
+templates/project-starter/         # full reference-heavy starter
+```
+
+Copy one starter into the root of a new repo, then customise it for that project's stack, test commands, release process, and external tools.
+
+The public docs are grouped into `docs/core/`, `docs/mcp/`, and `docs/design-start/`. The starters keep project docs flatter and more practical so copied projects are easier to scan.
+
+## Recommended: lean starter
+
+Use this for most real app repos:
+
+```text
+templates/project-starter-lean/
+```
+
+It includes the most important files only:
+
+```text
+AGENTS.md
+CLAUDE.md
+docs/architecture.md
+docs/testing.md
+docs/release.md
+design-start/README.md
+design-start/product-brief.md
+design-start/brand-kit.md
+design-start/screen-spec.md
+design-start/implementation-handoff.md
+.agents/skills/review-pr/
+.agents/skills/write-tests/
+.agents/skills/design-to-code/
+.agents/skills/ui-assets/
+.claude/skills/review-pr/
+.claude/skills/write-tests/
+.claude/skills/design-to-code/
+.claude/skills/ui-assets/
+```
+
+This gives agents enough context to:
+
+- understand project rules and protected files
+- discover real test/lint/build commands
+- help shape product specs and brand direction
+- create quality screen specs before coding
+- implement UI from an approved handoff
+- review the resulting diff
+
+## Full starter
+
+Use this when you want the new repo to carry the whole local reference playbook:
 
 ```text
 templates/project-starter/
 ```
 
-Copy its contents into the root of a new repo, then customise it for that project's stack, test commands, release process, and external tools.
-
-The public docs are grouped into `docs/core/`, `docs/mcp/`, and `docs/design-start/`. The starter intentionally keeps most project docs flat under `templates/project-starter/docs/` so copied projects are easier to scan.
-
-## What is included
+It includes:
 
 ```text
 AGENTS.md                         # Codex/general agent instructions
@@ -43,7 +92,7 @@ design-start/                     # Design discovery and handoff workflow
 
 ## First files to edit
 
-Edit these before asking an agent to work in the new repo:
+For either starter, edit these before asking an agent to work in the new repo:
 
 ```text
 AGENTS.md
@@ -51,7 +100,7 @@ CLAUDE.md
 docs/architecture.md
 docs/testing.md
 docs/release.md
-docs/project-level-mcps-and-skills.md
+design-start/
 ```
 
 Remove stack-specific sections that do not apply. For example, delete Android emulator guidance if the project is web-only.
@@ -86,4 +135,4 @@ Summarise:
 
 ## Maintenance rule
 
-When you update the public playbook, decide whether the starter template needs the same update. The public docs explain the system; the starter template is what new projects inherit.
+When you update the public playbook, decide whether either starter template needs the same update. The public docs explain the system; the starter templates are what new projects inherit.

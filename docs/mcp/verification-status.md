@@ -58,4 +58,4 @@ When refreshing this page:
 2. Update any commands or links that changed.
 3. Update the `Last verified` date.
 4. Run `mkdocs build --strict`.
-5. Mirror important changes into `templates/project-starter/` if new projects should inherit them.
+5. Mirror important changes into `templates/project-starter-lean/` and `templates/project-starter/` if new projects should inherit them.

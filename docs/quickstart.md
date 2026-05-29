@@ -12,15 +12,21 @@ This page is not the full design/spec workflow. It gets the repo ready so Codex 
 
 ## 1. Copy the starter
 
-Copy the contents of:
+For most new apps, copy the lean starter:
+
+```text
+templates/project-starter-lean/
+```
+
+into your new project root.
+
+Use the full starter only if you want the new repo to carry the complete local reference docs:
 
 ```text
 templates/project-starter/
 ```
 
-into your new project root.
-
-Keep what fits your project. Delete anything that is clearly irrelevant, such as Android testing notes in a web-only project.
+Keep what fits your project. Delete anything that is clearly irrelevant.
 
 ## 2. Customise the required files
 
@@ -122,16 +128,16 @@ Read later:
 
 ## 5. Check the skills are relevant
 
-The starter includes:
+The lean starter includes:
 
 ```text
 review-pr
 write-tests
-debug-issue
-android-testing
 design-to-code
 ui-assets
 ```
+
+The full starter also includes extra reference skills such as `debug-issue` and `android-testing`.
 
 Delete skills you do not need. Keep skills you expect to use repeatedly.
 

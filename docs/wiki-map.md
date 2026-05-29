@@ -48,7 +48,7 @@ Start here:
 Source of truth:
 - GitHub Pages site
 - Repository README
-- templates/project-starter/
+- templates/project-starter-lean/
 ```
 
 ## Keep one source of truth

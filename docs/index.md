@@ -29,7 +29,7 @@ Everything else (skill anatomy, MCP scopes, design-start, troubleshooting) is re
 ## Setup steps
 
 1. Read [Start Here in 10 Minutes](quickstart.md).
-2. Copy `templates/project-starter/` into a new project.
+2. Copy `templates/project-starter-lean/` into a new project.
 3. Customise `AGENTS.md`, `CLAUDE.md`, `docs/testing.md`, `docs/architecture.md`, and `docs/release.md`.
 4. Keep global MCP config minimal.
 5. Add project-level MCPs only when needed.
