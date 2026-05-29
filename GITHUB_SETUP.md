@@ -75,7 +75,7 @@ Keep detailed docs in `docs/` and publish them with GitHub Pages. See `docs/wiki
 Copy:
 
 ```text
-templates/project-starter/
+templates/project-starter-lean/
 ```
 
 into your new project root.
@@ -88,8 +88,7 @@ CLAUDE.md
 docs/testing.md
 docs/architecture.md
 docs/release.md
-docs/project-level-mcps-and-skills.md
-docs/mcp-security.md
+design-start/
 ```
 
 ## Local docs dependencies

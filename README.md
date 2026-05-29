@@ -27,7 +27,8 @@ GitHub PR = final audit trail
 
 ```text
 docs/                         # MkDocs/GitHub Pages documentation
-templates/project-starter/    # Files to copy into new projects
+templates/project-starter-lean/ # Recommended starter for most new apps
+templates/project-starter/    # Full reference-heavy starter
 mkdocs.yml                    # MkDocs Material config
 .github/workflows/            # GitHub Pages deployment workflow
 .github/ISSUE_TEMPLATE/       # Public repo issue templates
@@ -53,17 +54,23 @@ Read:
 docs/quickstart.md
 ```
 
-Then copy the starter template into a new project and customise the project-specific files.
+Then copy the lean starter template into a new project and customise the project-specific files.
 
 ## Use the starter in a new project
 
-Copy:
+For most new apps, copy:
+
+```text
+templates/project-starter-lean/
+```
+
+If you want the full local reference set, copy:
 
 ```text
 templates/project-starter/
 ```
 
-into your new repo, then customise:
+Then customise:
 
 ```text
 AGENTS.md
@@ -71,8 +78,7 @@ CLAUDE.md
 docs/testing.md
 docs/architecture.md
 docs/release.md
-docs/project-level-mcps-and-skills.md
-docs/mcp-security.md
+design-start/
 ```
 
 ## Run docs locally
