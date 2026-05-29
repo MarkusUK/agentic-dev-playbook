@@ -122,6 +122,15 @@ Project-specific MCP config can be committed only when it is safe for the team a
 
 ## Suggested first prompt
 
+The lean starter includes four first prompts in its `README.md`:
+
+- setup reconnaissance
+- spec and design
+- implementation planning
+- Claude review
+
+Use this one immediately after copying a starter:
+
 ```text
 Read AGENTS.md, CLAUDE.md, docs/architecture.md, docs/testing.md, and docs/release.md.
 
@@ -132,6 +141,8 @@ Summarise:
 - which MCPs and skills are available
 - anything missing before you can safely make changes
 ```
+
+Then use the design and implementation prompts inside the copied starter when you are ready to shape the product and start coding.
 
 ## Maintenance rule
 

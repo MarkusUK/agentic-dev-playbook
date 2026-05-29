@@ -45,7 +45,11 @@ Keep:
 
 Delete anything irrelevant to the project.
 
-## First safe prompt
+## First prompts
+
+Use these prompts to start the agent workflow without having to invent the first message each time.
+
+### 1. Setup reconnaissance
 
 ```text
 Read AGENTS.md, CLAUDE.md, docs/architecture.md, docs/testing.md, docs/release.md, and design-start/README.md.
@@ -57,6 +61,59 @@ Tell me:
 - what commands are available
 - what design/spec decisions should be made before coding
 - the safest next step
+```
+
+### 2. Spec and design
+
+Use before writing production code:
+
+```text
+Read ideas.md if it exists, then read AGENTS.md, docs/architecture.md, and design-start/README.md.
+
+Do not write production code yet.
+
+Help me turn this idea into:
+- a product brief
+- brand direction
+- first screen list
+- key user flows
+- risks and open questions
+
+App idea:
+[paste idea]
+```
+
+### 3. Implementation planning
+
+Use after the brief, brand, screen spec, and handoff are approved:
+
+```text
+Read AGENTS.md, docs/architecture.md, docs/testing.md, and design-start/implementation-handoff.md.
+
+Do not edit yet.
+
+Propose:
+- files likely to change
+- existing patterns to reuse
+- risks
+- tests/checks to run
+- the smallest safe implementation plan
+```
+
+### 4. Claude review
+
+Use after Codex has made changes:
+
+```text
+Read CLAUDE.md and review the current diff.
+
+Focus on:
+- bugs
+- missing tests
+- regression risk
+- security or data-loss risk
+- unnecessary complexity
+- whether the change matches the approved spec/design
 ```
 
 ## Recommended next workflow
